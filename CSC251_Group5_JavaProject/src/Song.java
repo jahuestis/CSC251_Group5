@@ -65,19 +65,19 @@ public class Song {
 		int _durationSeconds;
 		
 		public Duration() {
-			_duration = stringToDuration("0:00");
+			_duration = formatDurationStr("0:00");
 			_durationSeconds = 0;
 		}
 		
 		public Duration(String durationStr) {
-			_duration = stringToDuration(durationStr);
+			_duration = formatDurationStr(durationStr);
 			// Determine duration in seconds
 			String[] durationSplit = _duration.split(":");
 			_durationSeconds = Integer.parseInt(durationSplit[0]) * 60 + Integer.parseInt(durationSplit[1]); 
 
 		}
 		
-		private String stringToDuration(String durationStr) {
+		private String formatDurationStr(String durationStr) {
 			// Regex check that duration entered matches mm:ss format
 			Pattern pattern = Pattern.compile("^\\d{1,2}:[0-5]\\d$");
 			if (pattern.matcher(durationStr).matches()) {
