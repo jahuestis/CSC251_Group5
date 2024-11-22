@@ -3,13 +3,13 @@ import java.util.regex.Pattern;
 
 public class Song {
 	
-	String _title;
-	String _artist;
-	Duration _length;
+	private String _title;
+	private String _artist;
+	private Duration _length;
 	
 	public Song() {
-		_title = "empty";
-		_artist = "empty";
+		_title = "untitled";
+		_artist = "no artist";
 		_length = new Duration();
 		
 	}
@@ -38,6 +38,10 @@ public class Song {
 		return _length;
 	}
 	
+	public int getLengthSeconds() {
+		return _length.getDurationSeconds();
+	}
+	
 	public void setTitle(String title) {
 		_title = title;
 	}
@@ -61,15 +65,15 @@ public class Song {
 	
 	
 	class Duration {
-		String _duration;
-		int _durationSeconds;
+		private String _duration;
+		private int _durationSeconds;
 		
-		public Duration() {
+		private Duration() {
 			_duration = formatDurationStr("0:00");
 			_durationSeconds = 0;
 		}
 		
-		public Duration(String durationStr) {
+		private Duration(String durationStr) {
 			_duration = formatDurationStr(durationStr);
 			// Determine duration in seconds
 			String[] durationSplit = _duration.split(":");
@@ -93,11 +97,11 @@ public class Song {
 			}
 		}
 		
-		public String getDuration() {
+		private String getDuration() {
 			return _duration;
 		}
 		
-		public int getDurationSeconds() {
+		private int getDurationSeconds() {
 			return _durationSeconds;
 		}
 		
