@@ -10,7 +10,7 @@ public class Song {
 	public Song() {
 		_title = "empty";
 		_artist = "empty";
-		_length = new Duration("0:00");
+		_length = new Duration();
 		
 	}
 	
@@ -64,26 +64,33 @@ public class Song {
 		String _duration;
 		int _durationSeconds;
 		
-		// Duration from String
-		public Duration(String duration) {
+		public Duration() {
+			_duration = stringToDuration("0:00");
+			_durationSeconds = 0;
+		}
+		
+		public Duration(String durationStr) {
+			_duration = stringToDuration(durationStr);
+			// Determine duration in seconds
+			String[] durationSplit = _duration.split(":");
+			_durationSeconds = Integer.parseInt(durationSplit[0]) * 60 + Integer.parseInt(durationSplit[1]); 
+
+		}
+		
+		private String stringToDuration(String durationStr) {
 			// Regex check that duration entered matches mm:ss format
 			Pattern pattern = Pattern.compile("^\\d{1,2}:[0-5]\\d$");
-			if (pattern.matcher(duration).matches()) {
+			if (pattern.matcher(durationStr).matches()) {
 				// Remove leading 0 in minutes for consistency
-				if (duration.length() == 5 && duration.charAt(0) == '0') {
-					_duration = duration.substring(1);
+				if (durationStr.length() == 5 && durationStr.charAt(0) == '0') {
+					return durationStr.substring(1);
 				} else {
-					_duration = duration;
+					return durationStr;
 				}
-				
-				// Determine duration in seconds
-				String[] durationSplit = _duration.split(":");
-				_durationSeconds = Integer.parseInt(durationSplit[0]) * 60 + Integer.parseInt(durationSplit[1]); 
-				
+							
 			} else {
-				throw new IllegalArgumentException("Duration (" + duration + ") entered in incorrect format (expected mm:ss/m:ss)");
+				throw new IllegalArgumentException("Duration (" + durationStr + ") entered in incorrect format (expected mm:ss/m:ss)");
 			}
-
 		}
 		
 		public String getDuration() {
