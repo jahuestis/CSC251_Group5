@@ -1,4 +1,3 @@
-
 public class TestPlaylist {
 	
 	public static void main(String[] args) {
@@ -58,8 +57,15 @@ public class TestPlaylist {
 		
 		myPlaylist.sortByLength();
 		System.out.println(myPlaylist);
-		
-		
-		
+
+		// Save playlist
+
+		myPlaylist.savePlaylist();
+
+		// Confirm save
+		System.out.println("\nCurrent playlist saved to playlist.txt");
+
+		// Playlist.txt can be found in the same directory and checked
+
 	}
 }
