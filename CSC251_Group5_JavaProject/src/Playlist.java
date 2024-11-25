@@ -129,10 +129,12 @@ public class Playlist {
 
 		try {
 			// create a file called "playlist.txt"
-			File file = new File("playlist.txt");
+			
+			String fileName = getTitle().replaceAll(" ", "_").toLowerCase() + ".txt";
+			File file = new File(fileName);
 
 			// PrintWriter to write to the file
-			PrintWriter saver = new PrintWriter(new FileWriter("playlist.txt"));			
+			PrintWriter saver = new PrintWriter(new FileWriter(fileName));			
 			
 			// write to the file
 			saver.println(this.toString());
