@@ -2,6 +2,12 @@
 import java.util.ArrayList;
 import java.util.Collections;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+
 public class Playlist {
 	
 	ArrayList<PlaylistSlot> _playlist;
@@ -117,5 +123,35 @@ public class Playlist {
 			return _defaultPosition;
 		}
 		
+	}
+
+	public void savePlaylist() {
+
+		try {
+			// create a file called "playlist.txt"
+			File file = new File("playlist.txt");
+
+			// PrintWriter to write to the file
+			PrintWriter saver = new PrintWriter(new FileWriter("playlist.txt"));			
+			
+			// write to the file
+			saver.println(this.toString());
+
+			// close the PrintWriter
+			saver.close();	
+
+			// print "Playlist saved" confirmation
+			System.out.println("Playlist saved");
+
+		} catch (Exception e) {
+
+			// in case of error, Print "Playlist could not be saved"
+
+			System.out.println("Playlist could not be saved");
+			System.out.println(e); 
+
+		}
+        
+
 	}
 }
